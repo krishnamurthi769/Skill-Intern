@@ -1,5 +1,5 @@
 
-import React from 'react';
+import * as React from 'react';
 import SectionHeader from '../components/ui/SectionHeader';
 import { SERVICES_DATA } from '../constants';
 import { Code2, Laptop, LayoutTemplate, Fingerprint, Megaphone, Sparkles } from 'lucide-react';
