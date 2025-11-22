@@ -18,14 +18,14 @@ const ServiceManager: React.FC = () => {
     }, []);
 
     const fetchServices = async () => {
-        const res = await fetch('http://localhost:5000/api/content/services');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/services`);
         const data = await res.json();
         setServices(data);
     };
 
     const handleDelete = async (id: number) => {
         if (!confirm('Are you sure?')) return;
-        const res = await fetch(`http://localhost:5000/api/content/services/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/services/${id}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
@@ -45,8 +45,8 @@ const ServiceManager: React.FC = () => {
     const handleSave = async () => {
         const method = currentService.id ? 'PUT' : 'POST';
         const url = currentService.id
-            ? `http://localhost:5000/api/content/services/${currentService.id}`
-            : 'http://localhost:5000/api/content/services';
+            ? `${import.meta.env.VITE_API_URL}/api/content/services/${currentService.id}`
+            : `${import.meta.env.VITE_API_URL}/api/content/services`;
 
         const res = await fetch(url, {
             method,

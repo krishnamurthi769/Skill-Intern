@@ -9,7 +9,7 @@ const Services: React.FC = () => {
   const [services, setServices] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    fetch('http://localhost:5000/api/content/services')
+    fetch(`${import.meta.env.VITE_API_URL}/api/content/services`)
       .then(res => res.json())
       .then(data => setServices(data))
       .catch(err => console.error('Failed to fetch services:', err));

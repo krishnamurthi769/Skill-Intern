@@ -6,7 +6,7 @@ const Terms: React.FC = () => {
     const [content, setContent] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/content/site-content')
+        fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`)
             .then(res => res.json())
             .then(data => {
                 const item = data.find((i: any) => i.key === 'terms_content');

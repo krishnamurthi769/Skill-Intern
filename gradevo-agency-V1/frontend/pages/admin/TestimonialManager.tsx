@@ -21,14 +21,14 @@ const TestimonialManager: React.FC = () => {
     }, []);
 
     const fetchTestimonials = async () => {
-        const res = await fetch('http://localhost:5000/api/content/testimonials');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/testimonials`);
         const data = await res.json();
         setTestimonials(data);
     };
 
     const handleDelete = async (id: number) => {
         if (window.confirm('Are you sure?')) {
-            const res = await fetch(`http://localhost:5000/api/content/testimonials/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/testimonials/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
             });
@@ -59,8 +59,8 @@ const TestimonialManager: React.FC = () => {
         }
 
         const url = currentItem.id
-            ? `http://localhost:5000/api/content/testimonials/${currentItem.id}`
-            : 'http://localhost:5000/api/content/testimonials';
+            ? `${import.meta.env.VITE_API_URL}/api/content/testimonials/${currentItem.id}`
+            : `${import.meta.env.VITE_API_URL}/api/content/testimonials`;
 
         const method = currentItem.id ? 'PUT' : 'POST';
 
@@ -105,7 +105,7 @@ const TestimonialManager: React.FC = () => {
                     <div key={item.id} className="bg-white p-4 rounded shadow flex justify-between items-center">
                         <div className="flex items-center gap-4">
                             {item.image_url && (
-                                <img src={`http://localhost:5000${item.image_url}`} alt={item.name} className="w-12 h-12 rounded-full object-cover" />
+                                <img src={`${import.meta.env.VITE_API_URL}${item.image_url}`} alt={item.name} className="w-12 h-12 rounded-full object-cover" />
                             )}
                             <div>
                                 <h3 className="font-bold">{item.name}</h3>

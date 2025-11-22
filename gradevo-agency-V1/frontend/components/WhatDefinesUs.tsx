@@ -20,7 +20,7 @@ const WhatDefinesUs: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/content/dna');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/dna`);
         const data = await res.json();
         setDefinesData(data);
       } catch (error) {
@@ -115,7 +115,7 @@ const WhatDefinesUs: React.FC = () => {
               <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 bg-gradevo-navy/40 z-10 group-hover:bg-gradevo-navy/20 transition-colors duration-500" />
                 <img
-                  src={item.image.startsWith('http') ? item.image : `http://localhost:5000${item.image}`}
+                  src={item.image.startsWith('http') ? item.image : `${import.meta.env.VITE_API_URL}${item.image}`}
                   alt={item.title}
                   className="card-image w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700 grayscale group-hover:grayscale-0"
                 />

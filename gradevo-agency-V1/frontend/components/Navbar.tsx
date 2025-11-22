@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const fetchLogo = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/content/site-content');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
         const data = await res.json();
         const logoItem = data.find((item: any) => item.key === 'logo_url');
         if (logoItem) {
@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
             <div className={`flex flex-col leading-[0.85] overflow-hidden transition-all duration-500 ease-in-out ${scrolled ? 'max-w-0 opacity-0 -translate-x-4' : 'max-w-[200px] opacity-100 translate-x-0'}`}>
               {logoUrl ? (
                 <img
-                  src={logoUrl.startsWith('http') ? logoUrl : `http://localhost:5000${logoUrl}`}
+                  src={logoUrl.startsWith('http') ? logoUrl : `${import.meta.env.VITE_API_URL}${logoUrl}`}
                   alt="Gradevo Logo"
                   className="h-12 object-contain"
                 />

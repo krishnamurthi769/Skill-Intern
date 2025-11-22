@@ -19,14 +19,14 @@ const DnaManager: React.FC = () => {
     }, []);
 
     const fetchItems = async () => {
-        const res = await fetch('http://localhost:5000/api/content/dna');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/dna`);
         const data = await res.json();
         setItems(data);
     };
 
     const handleDelete = async (id: number) => {
         if (window.confirm('Are you sure?')) {
-            const res = await fetch(`http://localhost:5000/api/content/dna/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/dna/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
             });
@@ -56,8 +56,8 @@ const DnaManager: React.FC = () => {
         }
 
         const url = currentItem.id
-            ? `http://localhost:5000/api/content/dna/${currentItem.id}`
-            : 'http://localhost:5000/api/content/dna';
+            ? `${import.meta.env.VITE_API_URL}/api/content/dna/${currentItem.id}`
+            : `${import.meta.env.VITE_API_URL}/api/content/dna`;
 
         const method = currentItem.id ? 'PUT' : 'POST';
 
@@ -103,7 +103,7 @@ const DnaManager: React.FC = () => {
                         <div className="flex items-center gap-4">
                             {item.image && (
                                 <img
-                                    src={item.image.startsWith('http') ? item.image : `http://localhost:5000${item.image}`}
+                                    src={item.image.startsWith('http') ? item.image : `${import.meta.env.VITE_API_URL}${item.image}`}
                                     alt={item.title}
                                     className="w-16 h-16 rounded object-cover"
                                 />

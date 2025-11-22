@@ -12,7 +12,7 @@ const Testimonials: React.FC = () => {
   const [testimonials, setTestimonials] = React.useState<any[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/content/testimonials')
+    fetch(`${import.meta.env.VITE_API_URL}/api/content/testimonials`)
       .then(res => res.json())
       .then(data => setTestimonials(data))
       .catch(err => console.error('Failed to fetch testimonials:', err));
@@ -58,7 +58,7 @@ const Testimonials: React.FC = () => {
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 {item.image_url ? (
                   <img
-                    src={item.image_url.startsWith('http') ? item.image_url : `http://localhost:5000${item.image_url}`}
+                    src={item.image_url.startsWith('http') ? item.image_url : `${import.meta.env.VITE_API_URL}${item.image_url}`}
                     alt={item.name}
                     className={`${testimonials.length <= 3 ? 'w-12 h-12' : 'w-10 h-10'} rounded-full object-cover border border-white/10`}
                   />

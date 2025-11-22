@@ -63,7 +63,7 @@ const ContactManager: React.FC = () => {
 
     const fetchContactInfo = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/content/site-content');
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
             const data = await res.json();
             const info: any = {};
             data.forEach((item: any) => {
@@ -77,7 +77,7 @@ const ContactManager: React.FC = () => {
 
     const fetchSubmissions = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/content/contact/submissions', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/contact/submissions`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             if (res.ok) {
@@ -93,7 +93,7 @@ const ContactManager: React.FC = () => {
 
     const fetchReplies = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/content/contact/replies', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/contact/replies`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             if (res.ok) {
@@ -113,7 +113,7 @@ const ContactManager: React.FC = () => {
         setMessage('');
         try {
             const promises = Object.entries(contactInfo).map(([key, value]) =>
-                fetch('http://localhost:5000/api/content/site-content', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ const ContactManager: React.FC = () => {
         setSendingReply(true);
 
         try {
-            const res = await fetch('http://localhost:5000/api/content/contact/reply', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/contact/reply`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

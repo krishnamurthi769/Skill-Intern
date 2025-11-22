@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchFeaturedWork = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/content/portfolio');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/portfolio`);
         const data = await res.json();
         const featured = data.filter((item: any) => item.is_featured);
         setTotalFeatured(featured.length);
@@ -122,7 +122,7 @@ const Home: React.FC = () => {
                   >
                     <div className="absolute inset-0 bg-gradevo-blue/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay" />
                     <img
-                      src={item.image.startsWith('http') ? item.image : `http://localhost:5000${item.image}`}
+                      src={item.image.startsWith('http') ? item.image : `${import.meta.env.VITE_API_URL}${item.image}`}
                       alt={item.title}
                       className="w-full aspect-[4/3] object-cover transform group-hover:scale-110 transition-transform duration-700"
                     />

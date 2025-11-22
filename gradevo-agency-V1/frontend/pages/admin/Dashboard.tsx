@@ -14,9 +14,9 @@ const Dashboard: React.FC = () => {
         const fetchStats = async () => {
             try {
                 const [servicesRes, portfolioRes, testimonialsRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/content/services'),
-                    fetch('http://localhost:5000/api/content/portfolio'),
-                    fetch('http://localhost:5000/api/content/testimonials')
+                    fetch(`${import.meta.env.VITE_API_URL}/api/content/services`),
+                    fetch(`${import.meta.env.VITE_API_URL}/api/content/portfolio`),
+                    fetch(`${import.meta.env.VITE_API_URL}/api/content/testimonials`)
                 ]);
 
                 const services = await servicesRes.json();

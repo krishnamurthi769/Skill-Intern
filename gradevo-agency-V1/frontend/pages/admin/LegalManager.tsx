@@ -13,7 +13,7 @@ const LegalManager: React.FC = () => {
 
     const fetchContent = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/content/site-content');
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
             const data = await res.json();
             const contentMap: Record<string, string> = {};
             data.forEach((item: { key: string; value: string }) => {
@@ -34,7 +34,7 @@ const LegalManager: React.FC = () => {
         const value = content[key] || '';
 
         try {
-            await fetch('http://localhost:5000/api/content/site-content', {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

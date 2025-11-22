@@ -35,14 +35,14 @@ const PortfolioManager: React.FC = () => {
     }, [selectedCategory, portfolio]);
 
     const fetchPortfolio = async () => {
-        const res = await fetch('http://localhost:5000/api/content/portfolio');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/portfolio`);
         const data = await res.json();
         setPortfolio(data);
     };
 
     const handleDelete = async (id: number) => {
         if (window.confirm('Are you sure?')) {
-            const res = await fetch(`http://localhost:5000/api/content/portfolio/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/portfolio/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
             });
@@ -76,8 +76,8 @@ const PortfolioManager: React.FC = () => {
         }
 
         const url = currentItem.id
-            ? `http://localhost:5000/api/content/portfolio/${currentItem.id}`
-            : 'http://localhost:5000/api/content/portfolio';
+            ? `${import.meta.env.VITE_API_URL}/api/content/portfolio/${currentItem.id}`
+            : `${import.meta.env.VITE_API_URL}/api/content/portfolio`;
 
         const method = currentItem.id ? 'PUT' : 'POST';
 
@@ -137,7 +137,7 @@ const PortfolioManager: React.FC = () => {
                         <div className="relative h-40 mb-4 bg-gray-100 rounded overflow-hidden">
                             {item.image && (
                                 <img
-                                    src={item.image.startsWith('http') ? item.image : `http://localhost:5000${item.image}`}
+                                    src={item.image.startsWith('http') ? item.image : `${import.meta.env.VITE_API_URL}${item.image}`}
                                     alt={item.title}
                                     className="w-full h-full object-cover"
                                 />

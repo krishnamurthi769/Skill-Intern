@@ -10,7 +10,7 @@ const ServiceList: React.FC = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/content/services');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/services`);
         const data = await res.json();
         setServices(data);
       } catch (err) {

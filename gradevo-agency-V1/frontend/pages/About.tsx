@@ -11,7 +11,7 @@ const About: React.FC = () => {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/content/site-content');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
         const data = await res.json();
         const contentMap: Record<string, string> = {};
         data.forEach((item: { key: string; value: string }) => {
@@ -43,7 +43,7 @@ const About: React.FC = () => {
           <div className="relative">
             <div className="absolute inset-0 border-2 border-gradevo-red translate-x-4 translate-y-4 rounded-xl" />
             <img
-              src={content.story_image ? (content.story_image.startsWith('http') ? content.story_image : `http://localhost:5000${content.story_image}`) : "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"}
+              src={content.story_image ? (content.story_image.startsWith('http') ? content.story_image : `${import.meta.env.VITE_API_URL}${content.story_image}`) : "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"}
               alt="Team working"
               className="relative rounded-xl grayscale hover:grayscale-0 transition-all duration-500 w-full h-full object-cover"
             />

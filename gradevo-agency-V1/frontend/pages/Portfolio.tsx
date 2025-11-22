@@ -11,7 +11,7 @@ const Portfolio: React.FC = () => {
   const [activeCategory, setActiveCategory] = React.useState('All');
 
   React.useEffect(() => {
-    fetch('http://localhost:5000/api/content/portfolio')
+    fetch(`${import.meta.env.VITE_API_URL}/api/content/portfolio`)
       .then(res => res.json())
       .then(data => setPortfolioItems(data))
       .catch(err => console.error('Failed to fetch portfolio:', err));
@@ -50,7 +50,7 @@ const Portfolio: React.FC = () => {
                 data-cursor="View More"
               >
                 <img
-                  src={item.image.startsWith('http') ? item.image : `http://localhost:5000${item.image}`}
+                  src={item.image.startsWith('http') ? item.image : `${import.meta.env.VITE_API_URL}${item.image}`}
                   alt={item.title}
                   className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
                 />

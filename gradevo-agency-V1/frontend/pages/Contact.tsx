@@ -21,7 +21,7 @@ const Contact: React.FC = () => {
 
   const fetchContactInfo = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/content/site-content');
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
       const data = await res.json();
       const info: any = {};
       data.forEach((item: any) => {
@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch('http://localhost:5000/api/content/contact', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

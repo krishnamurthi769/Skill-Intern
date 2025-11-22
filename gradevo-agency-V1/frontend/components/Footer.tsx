@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
   useEffect(() => {
     const fetchContactInfo = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/content/site-content');
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
         const data = await res.json();
         const info: any = {};
         data.forEach((item: any) => {
@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
             <Link to="/" className="flex items-center gap-3 mb-6 group w-fit select-none">
               {contactInfo.logo_url ? (
                 <img
-                  src={contactInfo.logo_url.startsWith('http') ? contactInfo.logo_url : `http://localhost:5000${contactInfo.logo_url}`}
+                  src={contactInfo.logo_url.startsWith('http') ? contactInfo.logo_url : `${import.meta.env.VITE_API_URL}${contactInfo.logo_url}`}
                   alt="Gradevo Logo"
                   className="h-12 object-contain"
                 />

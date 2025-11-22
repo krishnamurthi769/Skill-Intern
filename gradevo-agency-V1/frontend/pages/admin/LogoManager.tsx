@@ -14,7 +14,7 @@ const LogoManager: React.FC = () => {
 
     const fetchLogo = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/content/site-content');
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
             const data = await res.json();
             const logoItem = data.find((item: any) => item.key === 'logo_url');
             if (logoItem) {
@@ -48,7 +48,7 @@ const LogoManager: React.FC = () => {
                 formData.append('value', logoUrl);
             }
 
-            const res = await fetch('http://localhost:5000/api/content/site-content', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -100,7 +100,7 @@ const LogoManager: React.FC = () => {
                         <div className="w-64 h-64 bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center relative overflow-hidden group">
                             {preview || logoUrl ? (
                                 <img
-                                    src={preview || (logoUrl.startsWith('http') ? logoUrl : `http://localhost:5000${logoUrl}`)}
+                                    src={preview || (logoUrl.startsWith('http') ? logoUrl : `${import.meta.env.VITE_API_URL}${logoUrl}`)}
                                     alt="Logo Preview"
                                     className="w-full h-full object-contain p-4"
                                 />

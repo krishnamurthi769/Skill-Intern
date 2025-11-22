@@ -13,7 +13,7 @@ const StoryManager: React.FC = () => {
 
     const fetchContent = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/content/site-content');
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`);
             const data = await res.json();
             const contentMap: Record<string, string> = {};
             data.forEach((item: { key: string; value: string }) => {
@@ -42,7 +42,7 @@ const StoryManager: React.FC = () => {
 
             for (const key of textFields) {
                 if (content[key]) {
-                    await fetch('http://localhost:5000/api/content/site-content', {
+                    await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const StoryManager: React.FC = () => {
                 formData.append('key', 'story_image');
                 formData.append('image', imageFile);
 
-                await fetch('http://localhost:5000/api/content/site-content', {
+                await fetch(`${import.meta.env.VITE_API_URL}/api/content/site-content`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -125,7 +125,7 @@ const StoryManager: React.FC = () => {
                         <div className="flex items-center gap-4">
                             {content.story_image && (
                                 <img
-                                    src={content.story_image.startsWith('http') ? content.story_image : `http://localhost:5000${content.story_image}`}
+                                    src={content.story_image.startsWith('http') ? content.story_image : `${import.meta.env.VITE_API_URL}${content.story_image}`}
                                     alt="Current story"
                                     className="w-24 h-24 object-cover rounded"
                                 />
