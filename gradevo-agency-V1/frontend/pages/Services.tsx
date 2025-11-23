@@ -7,6 +7,7 @@ import CTABanner from '../components/CTABanner';
 
 const Services: React.FC = () => {
   const [services, setServices] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/content/services`)
@@ -19,7 +20,8 @@ const Services: React.FC = () => {
           setServices([]);
         }
       })
-      .catch(err => console.error('Failed to fetch services:', err));
+      .catch(err => console.error('Failed to fetch services:', err))
+      .finally(() => setLoading(false));
   }, []);
 
   // Helper to map icon string to Lucide component
@@ -34,29 +36,43 @@ const Services: React.FC = () => {
         <SectionHeader title="What We #Do" subtitle="Comprehensive digital solutions tailored to your needs." />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {services.map((service) => {
-            const Icon = getIcon(service.icon);
-            return (
-              <div key={service.id} className="bg-white/5 p-8 md:p-12 rounded-3xl hover:bg-white/10 transition-colors border border-white/5 group">
+          {loading ? (
+            // Loading skeleton
+            Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="bg-white/5 p-8 md:p-12 rounded-3xl border border-white/5">
                 <div className="flex items-center justify-between mb-8">
-                  <Icon size={48} className="text-gradevo-blue group-hover:text-gradevo-red transition-colors duration-300" />
-                  <span className="text-4xl font-bold text-white/10 group-hover:text-white/20">0{service.id}</span>
+                  <div className="w-12 h-12 bg-white/5 rounded-lg animate-pulse" />
+                  <div className="w-16 h-8 bg-white/5 rounded animate-pulse" />
                 </div>
-                <h3 className="text-3xl font-display font-bold text-white mb-4">{service.title}</h3>
-                <p className="text-lg text-white/70 mb-8">{service.description}</p>
-
-                {/* Details are not currently in DB schema, hiding for now or could add to DB later */}
-                {/* <div className="grid grid-cols-2 gap-4">
-                  {service.details && service.details.map((detail: string, i: number) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-white/50">
-                      <div className="w-1.5 h-1.5 bg-gradevo-red rounded-full" />
-                      {detail}
-                    </div>
-                  ))}
-                </div> */}
+                <div className="h-8 bg-white/5 rounded mb-4 w-3/4 animate-pulse" />
+                <div className="h-20 bg-white/5 rounded mb-8 animate-pulse" />
               </div>
-            );
-          })}
+            ))
+          ) : (
+            services.map((service) => {
+              const Icon = getIcon(service.icon);
+              return (
+                <div key={service.id} className="bg-white/5 p-8 md:p-12 rounded-3xl hover:bg-white/10 transition-colors border border-white/5 group">
+                  <div className="flex items-center justify-between mb-8">
+                    <Icon size={48} className="text-gradevo-blue group-hover:text-gradevo-red transition-colors duration-300" />
+                    <span className="text-4xl font-bold text-white/10 group-hover:text-white/20">0{service.id}</span>
+                  </div>
+                  <h3 className="text-3xl font-display font-bold text-white mb-4">{service.title}</h3>
+                  <p className="text-lg text-white/70 mb-8">{service.description}</p>
+
+                  {/* Details are not currently in DB schema, hiding for now or could add to DB later */}
+                  {/* <div className="grid grid-cols-2 gap-4">
+                    {service.details && service.details.map((detail: string, i: number) => (
+                      <div key={i} className="flex items-center gap-2 text-sm text-white/50">
+                        <div className="w-1.5 h-1.5 bg-gradevo-red rounded-full" />
+                        {detail}
+                      </div>
+                    ))}
+                  </div> */}
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
 
