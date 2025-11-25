@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Layers, Image, MessageSquare, LogOut, Dna, BookOpen, Scale } from 'lucide-react';
+import { LayoutDashboard, Layers, Image, MessageSquare, LogOut, Dna, BookOpen, Scale, Aperture } from 'lucide-react';
 
 const AdminLayout: React.FC = () => {
     const location = useLocation();
@@ -19,6 +19,7 @@ const AdminLayout: React.FC = () => {
         { name: 'Our DNA', path: '/admin/dna', icon: Dna },
         { name: 'Our Story', path: '/admin/story', icon: BookOpen },
         { name: 'Legal', path: '/admin/legal', icon: Scale },
+        { name: 'Logo', path: '/admin/logo', icon: Aperture },
     ];
 
     return (
