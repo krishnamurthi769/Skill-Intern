@@ -57,7 +57,7 @@ export default function MapContainer({ isLoaded, children, userLocation, onLoad,
             options={{
                 styles: startoMapStyle,
                 disableDefaultUI: true,
-                backgroundColor: "#171717",
+                backgroundColor: "#050505",
                 clickableIcons: false, // Cleaner map
                 gestureHandling: "greedy", // Better mobile handling
                 ...options,

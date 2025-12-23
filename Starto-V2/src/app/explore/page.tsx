@@ -16,6 +16,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 import { startoMapStyle } from "@/components/map/startoMapStyle";
+import { EcosystemMarkers } from "@/components/map/EcosystemMarkers";
 
 const LIBRARIES: ("places")[] = ["places"];
 
@@ -201,7 +202,7 @@ export default function ExplorePage() {
     };
 
     return (
-        <div className="relative w-full h-screen bg-[#171717] text-white flex flex-col overflow-hidden">
+        <div className="relative w-full h-screen bg-[#050505] text-white flex flex-col overflow-hidden">
 
             {/* ZONE 1: MAP BACKGROUND */}
             <div className="absolute inset-0 z-0">
@@ -210,14 +211,24 @@ export default function ExplorePage() {
                     userLocation={mapCenter}
                     onLoad={handleMapLoad}
                     onClick={handleMapClick}
-                    options={{ styles: startoMapStyle }}
+                    options={{
+                        styles: startoMapStyle,
+                        disableDefaultUI: true,
+                        backgroundColor: "#050505",
+                        clickableIcons: false,
+                        gestureHandling: "greedy",
+                    }}
                 >
                     {selectedLocation && (
                         <Marker
                             position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
                             animation={google.maps.Animation.DROP}
+                            icon={{
+                                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                            }}
                         />
                     )}
+                    <EcosystemMarkers center={selectedLocation ? { lat: selectedLocation.lat, lng: selectedLocation.lng } : (mapCenter || { lat: 12.9716, lng: 77.5946 })} />
                 </MapContainer>
             </div>
 
