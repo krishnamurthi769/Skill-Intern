@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -363,11 +363,12 @@ export default function ExplorePage() {
                                     </DropdownMenuItem>
                                 </Link>
                                 <DropdownMenuSeparator className="bg-white/10" />
-                                <Link href="/api/auth/signout">
-                                    <DropdownMenuItem className="cursor-pointer text-red-400 focus:bg-red-500/10 focus:text-red-400">
-                                        <LogOut className="mr-2 h-4 w-4" /> Log out
-                                    </DropdownMenuItem>
-                                </Link>
+                                <DropdownMenuItem
+                                    className="cursor-pointer text-red-400 focus:bg-red-500/10 focus:text-red-400"
+                                    onSelect={() => signOut({ callbackUrl: "/login" })}
+                                >
+                                    <LogOut className="mr-2 h-4 w-4" /> Log out
+                                </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (

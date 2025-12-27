@@ -250,7 +250,7 @@ export function Navbar() {
                                         ))}
 
                                         <button
-                                            onClick={() => signOut()}
+                                            onClick={() => signOut({ callbackUrl: "/login" })}
                                             className="flex items-center gap-4 p-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 text-red-600 dark:text-red-400 transition-colors w-full text-left"
                                         >
                                             <div className="p-2 rounded-lg bg-red-50 dark:bg-red-900/10">

@@ -70,7 +70,7 @@ export function Sidebar({ className }: SidebarProps) {
                         <Button
                             variant="ghost"
                             className="w-full justify-start text-muted-foreground hover:text-foreground"
-                            onClick={() => signOut({ callbackUrl: "/" })}
+                            onClick={() => signOut({ callbackUrl: "/login" })}
                         >
                             <LogOut className="mr-2 h-4 w-4" />
                             Log out
