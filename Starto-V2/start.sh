@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# application-start-script
+# ensures strict LF line endings for Railway detection
+
 # default PORT if not provided by environment
 PORT="${PORT:-3000}"
 
