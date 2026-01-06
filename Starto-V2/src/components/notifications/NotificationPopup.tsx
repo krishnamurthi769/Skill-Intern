@@ -58,7 +58,7 @@ export function NotificationPopup() {
                         {notification.message}
                     </p>
                     <div className="flex gap-2">
-                        <Link href="/dashboard/nearby" onClick={() => setIsVisible(false)} className="w-full">
+                        <Link href="/nearby" onClick={() => setIsVisible(false)} className="w-full">
                             <Button size="sm" className="w-full font-medium">
                                 View Matches
                             </Button>
