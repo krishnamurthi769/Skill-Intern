@@ -84,10 +84,13 @@ model User {
   // Location (Base for all roles)
   latitude      Float?
   longitude     Float?
+  lastActive    DateTime  @default(now())
   city          String?
   state         String?
   country       String?
   pincode       String?
+
+  @@index([lastActive])
 
   accounts Account[]
 

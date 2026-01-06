@@ -5,6 +5,8 @@ import BetaBanner from "@/components/common/BetaBanner"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { redirect } from "next/navigation"
+import LocationManager from "@/components/common/LocationManager"
+
 
 export default async function DashboardLayout({
     children,
@@ -24,6 +26,7 @@ export default async function DashboardLayout({
         <div className="flex h-screen overflow-hidden flex-col">
             {/* Beta Banner - Global for Dashboard */}
             <BetaBanner />
+            <LocationManager />
 
             <div className="flex flex-1 overflow-hidden">
                 <Suspense fallback={<div className="w-64 border-r bg-muted/10" />}>
