@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import { X, Bell } from 'lucide-react';
 
 export function NotificationPopup() {
     const [notification, setNotification] = useState<{ message: string } | null>(null);
@@ -9,7 +11,6 @@ export function NotificationPopup() {
 
     useEffect(() => {
         const checkNearby = async () => {
-            // Session storage check to prevent spam
             if (typeof window !== 'undefined' && sessionStorage.getItem("nearbyNotificationShown") === "true") {
                 return;
             }
@@ -29,7 +30,6 @@ export function NotificationPopup() {
             }
         };
 
-        // Small delay to let the page settle
         const timer = setTimeout(checkNearby, 2000);
         return () => clearTimeout(timer);
     }, []);
@@ -37,32 +37,32 @@ export function NotificationPopup() {
     if (!isVisible || !notification) return null;
 
     return (
-        <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-5 fade-in duration-500">
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-lg p-4 max-w-sm flex items-start gap-4">
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-full shrink-0">
-                    <span className="text-xl">🔔</span>
+        <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 fade-in duration-500">
+            <div className="bg-background border border-border/50 rounded-xl shadow-2xl p-4 max-w-sm flex items-start gap-4 backdrop-blur-md bg-opacity-95 dark:bg-opacity-90">
+                <div className="bg-primary/10 p-2.5 rounded-full shrink-0 text-primary">
+                    <Bell className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
-                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-1">
-                        Nearby Opportunity
-                    </p>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-3">
+                    <div className="flex justify-between items-start">
+                        <p className="text-sm font-semibold text-foreground mb-1">
+                            Nearby Opportunity
+                        </p>
+                        <button
+                            onClick={() => setIsVisible(false)}
+                            className="text-muted-foreground hover:text-foreground transition-colors -mt-1 -mr-1 p-1"
+                        >
+                            <X className="w-4 h-4" />
+                        </button>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                         {notification.message}
                     </p>
                     <div className="flex gap-2">
-                        <Link
-                            href="/explore"
-                            className="text-xs bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md font-medium transition-colors"
-                            onClick={() => setIsVisible(false)}
-                        >
-                            View Matches
+                        <Link href="/dashboard/nearby" onClick={() => setIsVisible(false)} className="w-full">
+                            <Button size="sm" className="w-full font-medium">
+                                View Matches
+                            </Button>
                         </Link>
-                        <button
-                            onClick={() => setIsVisible(false)}
-                            className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 px-2 py-1.5"
-                        >
-                            Dismiss
-                        </button>
                     </div>
                 </div>
             </div>
